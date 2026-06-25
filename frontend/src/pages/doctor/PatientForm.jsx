@@ -21,6 +21,7 @@ export default function PatientForm() {
     tunnelPlacement: '',
     complications: '',
     debridementDate: '',
+    debridementDate2: '',
     suturesRemovalDate: '',
     currentFlexion: 0,
     healthyFlexion: 150,
@@ -53,6 +54,7 @@ export default function PatientForm() {
             tunnelPlacement: p.tunnelPlacement || '',
             complications: p.complications || '',
             debridementDate: p.debridementDate ? p.debridementDate.split('T')[0] : '',
+            debridementDate2: p.debridementDate2 ? p.debridementDate2.split('T')[0] : '',
             suturesRemovalDate: p.suturesRemovalDate ? p.suturesRemovalDate.split('T')[0] : '',
             currentFlexion: p.currentFlexion || 0,
             healthyFlexion: p.healthyFlexion || 150,
@@ -114,32 +116,32 @@ export default function PatientForm() {
       <div className="flex justify-between items-center mb-6">
         <button 
           onClick={() => navigate(-1)} 
-          className="flex items-center gap-1 text-slate-600 hover:text-slate-900 transition font-medium"
+          className="flex items-center gap-1 text-brand-mute hover:text-brand-ink transition font-bold"
         >
           <ChevronLeft size={18} />
           Back
         </button>
-        <h2 className="text-2xl font-bold flex items-center gap-2">
+        <h2 className="text-2xl font-extrabold text-brand-ink tracking-tighter flex items-center gap-2">
           {isEdit ? 'Edit Patient Profile' : 'Add New Patient'}
         </h2>
       </div>
 
       <form onSubmit={handleSubmit} className="max-w-4xl space-y-6">
         {error && (
-          <div className="bg-red-50 text-red-700 p-4 rounded-xl border border-red-100 text-sm font-medium">
+          <div className="bg-brand-error/10 text-brand-error p-4 rounded-[16px] border border-brand-error/20 text-sm font-bold">
             {error}
           </div>
         )}
         
         {successMsg && (
-          <div className="bg-emerald-50 text-emerald-700 p-4 rounded-xl border border-emerald-100 text-sm font-medium">
+          <div className="bg-brand-successPale text-brand-successDeep p-4 rounded-[16px] border border-brand-successDeep/10 text-sm font-bold">
             {successMsg}
           </div>
         )}
 
         {/* Section 1: Personal Details */}
         <div className="card-premium">
-          <h3 className="font-bold text-base border-b pb-2 mb-4 text-slate-800">1. Account & Personal Details</h3>
+          <h3 className="font-bold text-base border-b border-brand-hairlineSoft pb-2 mb-4 text-brand-ink">1. Account & Personal Details</h3>
           <div className="grid md:grid-cols-2 gap-4">
             <div>
               <label className="label-premium">Full Name</label>
@@ -167,8 +169,8 @@ export default function PatientForm() {
                 placeholder="patient@example.com"
               />
               {!isEdit && (
-                <p className="text-xs text-slate-500 mt-1.5 flex items-center gap-1">
-                  <Info size={12} />
+                <p className="text-xs text-brand-mute mt-1.5 flex items-center gap-1 font-semibold">
+                  <Info size={12} className="text-brand-primary" />
                   An activation email will be sent to this address.
                 </p>
               )}
@@ -192,7 +194,7 @@ export default function PatientForm() {
                 name="gender"
                 value={form.gender}
                 onChange={handleChange}
-                className="input-premium"
+                className="input-premium cursor-pointer"
               >
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
@@ -216,7 +218,7 @@ export default function PatientForm() {
 
         {/* Section 2: Surgical Parameters */}
         <div className="card-premium">
-          <h3 className="font-bold text-base border-b pb-2 mb-4 text-slate-800">2. Surgical Metadata</h3>
+          <h3 className="font-bold text-base border-b border-brand-hairlineSoft pb-2 mb-4 text-brand-ink">2. Surgical Metadata</h3>
           <div className="grid md:grid-cols-2 gap-4">
             <div>
               <label className="label-premium">Surgery Date</label>
@@ -277,11 +279,22 @@ export default function PatientForm() {
             </div>
 
             <div>
-              <label className="label-premium">Debridement Date (if applicable)</label>
+              <label className="label-premium">Primary Debridement Date</label>
               <input
                 type="date"
                 name="debridementDate"
                 value={form.debridementDate}
+                onChange={handleChange}
+                className="input-premium"
+              />
+            </div>
+
+            <div>
+              <label className="label-premium">Secondary Debridement Date</label>
+              <input
+                type="date"
+                name="debridementDate2"
+                value={form.debridementDate2}
                 onChange={handleChange}
                 className="input-premium"
               />
@@ -302,7 +315,7 @@ export default function PatientForm() {
 
         {/* Section 3: Baseline Clinical Status */}
         <div className="card-premium">
-          <h3 className="font-bold text-base border-b pb-2 mb-4 text-slate-800">3. Current Baseline Parameters</h3>
+          <h3 className="font-bold text-base border-b border-brand-hairlineSoft pb-2 mb-4 text-brand-ink">3. Current Baseline Parameters</h3>
           <div className="grid md:grid-cols-2 gap-4">
             <div>
               <label className="label-premium">Current Flexion (degrees)</label>
@@ -395,7 +408,7 @@ export default function PatientForm() {
           <button
             type="submit"
             disabled={saving}
-            className="btn-brand-primary flex items-center gap-2 py-3 px-6 text-white font-semibold"
+            className="btn-brand-primary flex items-center gap-2 py-3 px-6 text-white font-bold shadow-none"
           >
             {saving ? (
               <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
@@ -410,7 +423,7 @@ export default function PatientForm() {
           <button
             type="button"
             onClick={() => navigate(-1)}
-            className="btn-brand-secondary px-6 font-semibold"
+            className="btn-brand-secondary px-6 font-bold shadow-none"
           >
             Cancel
           </button>

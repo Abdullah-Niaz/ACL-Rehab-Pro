@@ -146,7 +146,7 @@ export default function Layout({ children, role }) {
         {/* Sidebar Header */}
         <div className="h-16 flex items-center justify-between px-5 border-b border-slate-100">
           <div className="flex items-center gap-2.5 overflow-hidden">
-            <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold flex-shrink-0 shadow-md shadow-blue-100 animate-pulse">
+            <div className="w-8 h-8 rounded-full bg-brand-primary flex items-center justify-center text-white font-bold flex-shrink-0">
               <Activity size={18} />
             </div>
             {!isCollapsed && (
@@ -191,7 +191,7 @@ export default function Layout({ children, role }) {
                     title={isCollapsed ? link.label : ""}
                     className={isActive ? "sidebar-link-active" : "sidebar-link-inactive"}
                   >
-                    <IconComponent size={20} className={isActive ? "text-brand-primary" : "text-slate-500"} />
+                    <IconComponent size={20} className={isActive ? "text-brand-primary" : "text-brand-mute"} />
                     {!isCollapsed && (
                       <motion.span 
                         initial={{ opacity: 0 }}
@@ -202,12 +202,12 @@ export default function Layout({ children, role }) {
                       </motion.span>
                     )}
                     {!isCollapsed && link.badge && (
-                      <span className="bg-red-500 text-white rounded-full text-[10px] font-bold px-2 py-0.5 shadow-sm">
+                      <span className="bg-brand-primary text-white rounded-full text-[10px] font-bold px-2 py-0.5">
                         {link.badge}
                       </span>
                     )}
                     {isCollapsed && link.badge && (
-                      <span className="absolute top-2 right-2 h-2.5 w-2.5 bg-red-500 rounded-full ring-2 ring-white"></span>
+                      <span className="absolute top-2 right-2 h-2.5 w-2.5 bg-brand-primary rounded-full ring-2 ring-brand-canvas"></span>
                     )}
                   </Link>
                 );
@@ -236,8 +236,8 @@ export default function Layout({ children, role }) {
             </div>
           ) : (
             <div className="space-y-2">
-              <div className="flex items-center gap-3 p-2 rounded-xl bg-slate-50 border border-slate-100/60">
-                <div className="w-9 h-9 rounded-lg bg-blue-100 text-blue-700 border border-blue-200/50 flex items-center justify-center font-bold text-sm">
+              <div className="flex items-center gap-3 p-2 rounded-[16px] bg-brand-surfaceCard border border-brand-hairlineSoft">
+                <div className="w-9 h-9 rounded-[16px] bg-brand-secondaryBg text-brand-onSecondary flex items-center justify-center font-bold text-sm">
                   {userInitials}
                 </div>
                 <div className="overflow-hidden">
@@ -275,9 +275,9 @@ export default function Layout({ children, role }) {
               transition={{ duration: 0.2, ease: "easeOut" }}
               className="fixed top-0 bottom-0 left-0 w-72 bg-white z-40 p-5 flex flex-col md:hidden select-none border-r border-slate-200"
             >
-              <div className="flex items-center justify-between mb-8 pb-4 border-b border-slate-100">
+              <div className="flex items-center justify-between mb-8 pb-4 border-b border-brand-hairlineSoft">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold">
+                  <div className="w-8 h-8 rounded-full bg-brand-primary flex items-center justify-center text-white font-bold">
                     <Activity size={18} />
                   </div>
                   <span className="font-extrabold text-slate-900 tracking-tight">ACL Rehab Pro</span>
@@ -304,7 +304,7 @@ export default function Layout({ children, role }) {
                           onClick={() => setIsMobileOpen(false)}
                           className={isActive ? "sidebar-link-active" : "sidebar-link-inactive"}
                         >
-                          <IconComponent size={20} className={isActive ? "text-brand-primary" : "text-slate-500"} />
+                          <IconComponent size={20} className={isActive ? "text-brand-primary" : "text-brand-mute"} />
                           <span className="text-[13px] flex-1">{link.label}</span>
                           {link.badge && (
                             <span className="bg-red-500 text-white rounded-full text-[10px] font-bold px-2 py-0.5 shadow-sm">
@@ -318,9 +318,9 @@ export default function Layout({ children, role }) {
                 ))}
               </div>
 
-              <div className="pt-4 border-t border-slate-100 space-y-3">
-                <div className="flex items-center gap-3 p-2 rounded-xl bg-slate-50">
-                  <div className="w-9 h-9 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-sm">
+              <div className="pt-4 border-t border-brand-hairlineSoft space-y-3">
+                <div className="flex items-center gap-3 p-2 rounded-[16px] bg-brand-surfaceCard">
+                  <div className="w-9 h-9 rounded-[16px] bg-brand-secondaryBg text-brand-onSecondary flex items-center justify-center font-bold text-sm">
                     {userInitials}
                   </div>
                   <div>
@@ -347,7 +347,7 @@ export default function Layout({ children, role }) {
         style={{ paddingLeft: typeof window !== "undefined" && window.innerWidth >= 768 ? (isCollapsed ? 76 : 280) : 0 }}
       >
         {/* Top Navbar */}
-        <header className="h-16 bg-white/80 backdrop-blur-md border-b border-slate-200/60 px-4 md:px-8 flex items-center justify-between sticky top-0 z-10 select-none">
+        <header className="h-16 bg-brand-canvas/90 backdrop-blur-md border-b border-brand-hairlineSoft px-4 md:px-8 flex items-center justify-between sticky top-0 z-10 select-none">
           <div className="flex items-center gap-4">
             <button 
               onClick={() => setIsMobileOpen(true)}
@@ -367,10 +367,10 @@ export default function Layout({ children, role }) {
 
           <div className="flex items-center gap-4">
             {/* Notification Badge */}
-            <button className="p-2.5 text-slate-500 hover:text-slate-800 hover:bg-slate-50 rounded-xl transition relative border border-slate-100 bg-white">
+            <button className="p-2.5 text-brand-mute hover:text-brand-ink hover:bg-brand-surfaceCard rounded-[16px] transition relative border border-brand-hairlineSoft bg-brand-canvas">
               <Bell size={18} />
               {unreadCount > 0 && (
-                <span className="absolute top-1.5 right-1.5 h-2.5 w-2.5 bg-red-600 rounded-full ring-2 ring-white"></span>
+                <span className="absolute top-1.5 right-1.5 h-2.5 w-2.5 bg-brand-primary rounded-full ring-2 ring-brand-canvas"></span>
               )}
             </button>
             
@@ -378,11 +378,11 @@ export default function Layout({ children, role }) {
             
             {/* User Quick Info */}
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-slate-100 border border-slate-200/60 flex items-center justify-center font-bold text-xs text-slate-700 select-none">
+              <div className="w-8 h-8 rounded-[16px] bg-brand-surfaceCard border border-brand-hairlineSoft flex items-center justify-center font-bold text-xs text-brand-charcoal select-none">
                 {userInitials}
               </div>
-              <span className="text-xs font-bold text-slate-800 hidden sm:block">{user?.name}</span>
-              <span className="pill bg-blue-50 text-blue-700 text-[10px] font-bold capitalize py-0.5 px-2 border border-blue-100">
+              <span className="text-xs font-bold text-brand-ink hidden sm:block">{user?.name}</span>
+              <span className="rounded-full bg-brand-successPale text-brand-successDeep text-[10px] font-bold capitalize py-0.5 px-2 border border-brand-successDeep/10">
                 {user?.role}
               </span>
             </div>
@@ -396,41 +396,41 @@ export default function Layout({ children, role }) {
       </div>
 
       {/* 4. Touch-friendly Mobile Bottom Tab Bar */}
-      <nav className="fixed bottom-0 left-0 right-0 h-16 bg-white/95 backdrop-blur-md border-t border-slate-200/80 z-35 md:hidden flex items-center justify-around px-2 shadow-2xl shadow-slate-900 select-none">
+      <nav className="fixed bottom-0 left-0 right-0 h-16 bg-brand-canvas/95 backdrop-blur-md border-t border-brand-hairlineSoft z-35 md:hidden flex items-center justify-around px-2 select-none">
         {isDoctor ? (
           <>
-            <Link to="/doctor/dashboard" className={`flex flex-col items-center justify-center p-1.5 text-xs font-semibold ${location.pathname.startsWith('/doctor/dashboard') ? 'text-brand-primary' : 'text-slate-500'}`}>
+            <Link to="/doctor/dashboard" className={`flex flex-col items-center justify-center p-1.5 text-xs font-semibold ${location.pathname.startsWith('/doctor/dashboard') ? 'text-brand-primary' : 'text-brand-mute'}`}>
               <LayoutDashboard size={20} />
               <span className="text-[10px] mt-0.5">Overview</span>
             </Link>
-            <Link to="/doctor/patients" className={`flex flex-col items-center justify-center p-1.5 text-xs font-semibold ${location.pathname.startsWith('/doctor/patients') ? 'text-brand-primary' : 'text-slate-500'}`}>
+            <Link to="/doctor/patients" className={`flex flex-col items-center justify-center p-1.5 text-xs font-semibold ${location.pathname.startsWith('/doctor/patients') ? 'text-brand-primary' : 'text-brand-mute'}`}>
               <Users size={20} />
               <span className="text-[10px] mt-0.5">Patients</span>
             </Link>
-            <Link to="/doctor/analytics" className={`flex flex-col items-center justify-center p-1.5 text-xs font-semibold ${location.pathname.startsWith('/doctor/analytics') ? 'text-brand-primary' : 'text-slate-500'}`}>
+            <Link to="/doctor/analytics" className={`flex flex-col items-center justify-center p-1.5 text-xs font-semibold ${location.pathname.startsWith('/doctor/analytics') ? 'text-brand-primary' : 'text-brand-mute'}`}>
               <BarChart3 size={20} />
               <span className="text-[10px] mt-0.5">Analytics</span>
             </Link>
           </>
         ) : (
           <>
-            <Link to="/patient/dashboard" className={`flex flex-col items-center justify-center p-1.5 text-xs font-semibold ${location.pathname.startsWith('/patient/dashboard') ? 'text-brand-primary' : 'text-slate-500'}`}>
+            <Link to="/patient/dashboard" className={`flex flex-col items-center justify-center p-1.5 text-xs font-semibold ${location.pathname.startsWith('/patient/dashboard') ? 'text-brand-primary' : 'text-brand-mute'}`}>
               <LayoutDashboard size={20} />
               <span className="text-[10px] mt-0.5">Dashboard</span>
             </Link>
-            <Link to="/patient/plan" className={`flex flex-col items-center justify-center p-1.5 text-xs font-semibold ${location.pathname.startsWith('/patient/plan') ? 'text-brand-primary' : 'text-slate-500'}`}>
+            <Link to="/patient/plan" className={`flex flex-col items-center justify-center p-1.5 text-xs font-semibold ${location.pathname.startsWith('/patient/plan') ? 'text-brand-primary' : 'text-brand-mute'}`}>
               <BookOpen size={20} />
               <span className="text-[10px] mt-0.5">Plan</span>
             </Link>
-            <Link to="/patient/progress" className={`flex flex-col items-center justify-center p-1.5 text-xs font-semibold ${location.pathname.startsWith('/patient/progress') ? 'text-brand-primary' : 'text-slate-500'}`}>
+            <Link to="/patient/progress" className={`flex flex-col items-center justify-center p-1.5 text-xs font-semibold ${location.pathname.startsWith('/patient/progress') ? 'text-brand-primary' : 'text-brand-mute'}`}>
               <LineChart size={20} />
               <span className="text-[10px] mt-0.5">Log</span>
             </Link>
-            <Link to="/patient/messages" className={`flex flex-col items-center justify-center p-1.5 text-xs font-semibold ${location.pathname.startsWith('/patient/messages') ? 'text-brand-primary' : 'text-slate-500'} relative`}>
+            <Link to="/patient/messages" className={`flex flex-col items-center justify-center p-1.5 text-xs font-semibold ${location.pathname.startsWith('/patient/messages') ? 'text-brand-primary' : 'text-brand-mute'} relative`}>
               <MessageSquare size={20} />
               <span className="text-[10px] mt-0.5">Chat</span>
               {unreadCount > 0 && (
-                <span className="absolute top-1 right-2 bg-red-600 text-white rounded-full text-[8px] font-bold h-4 w-4 flex items-center justify-center shadow-sm">
+                <span className="absolute top-1 right-2 bg-brand-primary text-white rounded-full text-[8px] font-bold h-4 w-4 flex items-center justify-center">
                   {unreadCount}
                 </span>
               )}

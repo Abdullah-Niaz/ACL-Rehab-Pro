@@ -1,6 +1,8 @@
 import ProgressLog from '../models/ProgressLog.js';
 import PatientProfile from '../models/PatientProfile.js';
 import RehabPlan from '../models/RehabPlan.js';
+import User from '../models/User.js';
+import { sendRiskAlertEmail } from '../utils/email.js';
 
 export async function createLog(req, res) {
   try {
@@ -94,6 +96,100 @@ export async function createLog(req, res) {
       logsSaved.push(newLog);
     }
 
+    // ----------------------------------------------------
+    // Clinical Business Logic Rules Engine
+    // ----------------------------------------------------
+    let isReadyForProgression = false;
+    let isHighRisk = false;
+    let triggeredFlags = [];
+
+    const currentOp = opQuad !== undefined ? opQuad : (profile.operatedQuad || 0);
+    const currentHl = hlQuad !== undefined ? hlQuad : (profile.healthyQuad || 0);
+    let lsi = 100;
+    if (currentHl > 0 && currentOp > 0) {
+      lsi = Math.round((currentOp / currentHl) * 100);
+    }
+
+    const currentPain = painScore !== undefined ? painScore : 0;
+    const currentSwelling = swellingScore !== undefined ? swellingScore : 0;
+    const currentFlexion = flex !== undefined ? flex : (profile.currentFlexion || 0);
+    const currentExtension = ext !== undefined ? ext : 0;
+
+    // Check exit criteria benchmarks dynamically
+    if (profile.currentPhase === 1) {
+      if (currentFlexion >= 110 && currentExtension <= 0 && currentSwelling <= 2 && currentPain <= 3) {
+        isReadyForProgression = true;
+      }
+    } else if (profile.currentPhase === 2) {
+      if (currentFlexion >= 120 && currentSwelling <= 2 && currentPain <= 3) {
+        isReadyForProgression = true;
+      }
+    } else if (profile.currentPhase === 3) {
+      if (lsi >= 90 && currentFlexion >= 130 && currentSwelling <= 2 && currentPain <= 2) {
+        isReadyForProgression = true;
+      }
+    } else if (profile.currentPhase === 4) {
+      if (currentSwelling <= 2 && currentPain <= 2) {
+        isReadyForProgression = true;
+      }
+    } else if (profile.currentPhase === 5) {
+      if (currentSwelling <= 2 && currentPain <= 2) {
+        isReadyForProgression = true;
+      }
+    } else if (profile.currentPhase === 6) {
+      if (currentSwelling <= 1 && currentPain <= 1) {
+        isReadyForProgression = true;
+      }
+    } else if (profile.currentPhase === 7) {
+      if (lsi >= 95 && currentSwelling <= 1 && currentPain <= 1) {
+        isReadyForProgression = true;
+      }
+    }
+
+    // Monitoring subjective warning thresholds and keyword alerts
+    const noteText = (notes || "").toLowerCase();
+    const emergencyKeywords = ["calf pain", "calf swelling", "fever", "pus", "wound drainage", "infection", "giving way", "instability", "knee collapse"];
+    
+    for (const keyword of emergencyKeywords) {
+      if (noteText.includes(keyword)) {
+        isHighRisk = true;
+        triggeredFlags.push(`Reported keyword: "${keyword}"`);
+      }
+    }
+
+    if (currentPain >= 8) {
+      isHighRisk = true;
+      triggeredFlags.push(`Critical Pain Score: ${currentPain}/10`);
+    }
+    if (currentSwelling >= 8) {
+      isHighRisk = true;
+      triggeredFlags.push(`Critical Swelling Score: ${currentSwelling}/10`);
+    }
+
+    // Save changes to profile document
+    profile.readyForProgression = isReadyForProgression;
+    
+    const wasHighRisk = profile.highRisk;
+    profile.highRisk = isHighRisk;
+    await profile.save();
+
+    if (isHighRisk && !wasHighRisk) {
+      try {
+        const doctor = await User.findById(profile.doctorId);
+        const patientUser = await User.findById(patientId);
+        if (doctor && patientUser) {
+          await sendRiskAlertEmail({
+            doctorEmail: doctor.email,
+            doctorName: doctor.name,
+            patientName: patientUser.name,
+            reportedSymptoms: triggeredFlags.join(", ")
+          });
+        }
+      } catch (emailErr) {
+        console.error("Error sending emergency red flag email", emailErr);
+      }
+    }
+
     res.status(201).json(logsSaved[0]);
   } catch (error) {
     res.status(500).json({ message: error.message || 'Error saving progress' });
@@ -149,6 +245,8 @@ export async function myProgress(req, res) {
       doctor: profile.doctorId,
       currentPhase: profile.currentPhase,
       currentWeek: profile.currentWeek,
+      readyForProgression: profile.readyForProgression,
+      highRisk: profile.highRisk,
       assignedPlan: plan,
       profile: {
         age: profile.age,
@@ -160,6 +258,7 @@ export async function myProgress(req, res) {
         tunnelPlacement: profile.tunnelPlacement,
         complications: profile.complications,
         debridementDate: profile.debridementDate,
+        debridementDate2: profile.debridementDate2,
         suturesRemovalDate: profile.suturesRemovalDate,
         currentFlexion: profile.currentFlexion,
         healthyFlexion: profile.healthyFlexion,

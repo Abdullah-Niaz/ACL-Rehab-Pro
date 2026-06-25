@@ -21,6 +21,8 @@ export async function dashboard(req, res) {
       currentPhase: p.currentPhase,
       currentWeek: p.currentWeek,
       status: 'Active',
+      readyForProgression: p.readyForProgression,
+      highRisk: p.highRisk,
       profile: {
         operatedQuadSize: p.operatedQuad,
         healthyQuadSize: p.healthyQuad,
@@ -33,7 +35,9 @@ export async function dashboard(req, res) {
         graftType: p.graftType,
         graftSize: p.graftSize,
         complications: p.complications,
-        notes: p.notes
+        notes: p.notes,
+        readyForProgression: p.readyForProgression,
+        highRisk: p.highRisk
       }
     }));
 

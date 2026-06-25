@@ -32,13 +32,13 @@ export default function DoctorSettings() {
   return (
     <Layout role="doctor">
       <div className="mb-6">
-        <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">Workspace Settings</h2>
-        <p className="text-xs text-slate-500 mt-1">Configure profile details, clinic parameters, and notification alerts.</p>
+        <h2 className="text-3xl font-black text-brand-ink tracking-tighter">Workspace Settings</h2>
+        <p className="text-xs text-brand-mute mt-1">Configure profile details, clinic parameters, and notification alerts.</p>
       </div>
 
       <div className="max-w-3xl space-y-6">
         {success && (
-          <div className="bg-emerald-50 text-emerald-700 p-4 rounded-xl border border-emerald-100 text-sm font-semibold flex items-center gap-2">
+          <div className="bg-brand-successPale text-brand-successDeep p-4 rounded-md border border-brand-successDeep/10 text-sm font-semibold flex items-center gap-2">
             <CheckCircle size={16} />
             {success}
           </div>
@@ -47,8 +47,8 @@ export default function DoctorSettings() {
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Section 1: Doctor Profile */}
           <div className="card-premium">
-            <h3 className="font-bold text-slate-800 text-sm uppercase tracking-wider mb-4 border-b pb-2 flex items-center gap-2">
-              <User size={16} className="text-blue-600" />
+            <h3 className="font-extrabold text-brand-ink text-sm uppercase tracking-wider mb-4 border-b border-brand-hairlineSoft pb-2 flex items-center gap-2">
+              <User size={16} className="text-brand-primary" />
               Clinician Details
             </h3>
             <div className="grid md:grid-cols-2 gap-4">
@@ -69,7 +69,7 @@ export default function DoctorSettings() {
                   type="email"
                   value={form.email}
                   disabled
-                  className="input-premium bg-slate-50 text-slate-400 cursor-not-allowed"
+                  className="input-premium cursor-not-allowed"
                 />
               </div>
 
@@ -88,8 +88,8 @@ export default function DoctorSettings() {
 
           {/* Section 2: Clinical Thresholds */}
           <div className="card-premium">
-            <h3 className="font-bold text-slate-800 text-sm uppercase tracking-wider mb-4 border-b pb-2 flex items-center gap-2">
-              <Shield size={16} className="text-blue-600" />
+            <h3 className="font-extrabold text-brand-ink text-sm uppercase tracking-wider mb-4 border-b border-brand-hairlineSoft pb-2 flex items-center gap-2">
+              <Shield size={16} className="text-brand-primary" />
               Clinical Benchmarks
             </h3>
             <div className="space-y-4">
@@ -104,7 +104,7 @@ export default function DoctorSettings() {
                   className="input-premium max-w-xs"
                   required
                 />
-                <p className="text-xs text-slate-500 mt-1.5">
+                <p className="text-xs text-brand-mute mt-1.5">
                   Patients with a calculated quad symmetry percentage below this threshold will automatically trigger a red "High Risk" alert on your dashboard.
                 </p>
               </div>
@@ -113,20 +113,20 @@ export default function DoctorSettings() {
 
           {/* Section 3: Notification Toggles */}
           <div className="card-premium">
-            <h3 className="font-bold text-slate-800 text-sm uppercase tracking-wider mb-4 border-b pb-2 flex items-center gap-2">
-              <Bell size={16} className="text-blue-600" />
+            <h3 className="font-extrabold text-brand-ink text-sm uppercase tracking-wider mb-4 border-b border-brand-hairlineSoft pb-2 flex items-center gap-2">
+              <Bell size={16} className="text-brand-primary" />
               Notifications
             </h3>
             <div className="flex items-center justify-between py-2">
               <div>
-                <span className="font-bold text-slate-800 text-sm block">Email Log Alerts</span>
-                <span className="text-xs text-slate-500 block">Receive instant emails when a patient reports flexion complications.</span>
+                <span className="font-bold text-brand-ink text-sm block">Email Log Alerts</span>
+                <span className="text-xs text-brand-mute block">Receive instant emails when a patient reports flexion complications.</span>
               </div>
               <input
                 type="checkbox"
                 checked={form.emailAlerts}
                 onChange={(e) => setForm({ ...form, emailAlerts: e.target.checked })}
-                className="w-5 h-5 accent-blue-600"
+                className="w-5 h-5 accent-brand-primary"
               />
             </div>
           </div>
@@ -134,7 +134,7 @@ export default function DoctorSettings() {
           <button
             type="submit"
             disabled={saving}
-            className="btn-brand-primary w-full py-3.5 flex justify-center items-center shadow-lg shadow-blue-100"
+            className="btn-brand-primary w-full py-3.5 flex justify-center items-center shadow-none"
           >
             {saving ? (
               <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>

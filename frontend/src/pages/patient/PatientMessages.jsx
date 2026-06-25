@@ -80,19 +80,19 @@ export default function PatientMessages() {
 
   return (
     <Layout role="patient">
-      <div className="h-[750px] bg-white rounded-2xl border border-slate-200 shadow-premium flex overflow-hidden select-none">
+      <div className="h-[750px] bg-brand-canvas rounded-[16px] border border-brand-hairlineSoft flex overflow-hidden select-none shadow-none">
         
         {/* Left / Center pane: Chat thread */}
-        <div className="flex-1 flex flex-col bg-slate-50/50">
+        <div className="flex-1 flex flex-col bg-brand-surfaceSoft/30">
           {/* Active Header */}
-          <div className="bg-white px-6 py-4 border-b border-slate-200/60 flex justify-between items-center shadow-sm">
+          <div className="bg-brand-canvas px-6 py-4 border-b border-brand-hairlineSoft flex justify-between items-center shadow-none">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs">
+              <div className="w-9 h-9 rounded-[16px] bg-brand-surfaceCard text-brand-charcoal flex items-center justify-center font-bold text-xs">
                 {docInitials}
               </div>
               <div>
-                <h4 className="font-extrabold text-sm text-slate-900">{doctor?.name || "Managing Doctor"}</h4>
-                <p className="text-[9px] text-slate-400 font-bold uppercase tracking-wider mt-0.5">Secure Clinical Messaging</p>
+                <h4 className="font-extrabold text-sm text-brand-ink">{doctor?.name || "Managing Doctor"}</h4>
+                <p className="text-[9px] text-brand-mute font-bold uppercase tracking-wider mt-0.5">Secure Clinical Messaging</p>
               </div>
             </div>
           </div>
@@ -100,9 +100,9 @@ export default function PatientMessages() {
           {/* Messages list */}
           <div className="flex-1 overflow-y-auto p-6 space-y-4 custom-scrollbar">
             {messages.length === 0 ? (
-              <div className="h-full flex flex-col justify-center items-center text-slate-400">
-                <MessageCircle size={36} className="text-slate-300 mb-2" />
-                <p className="text-xs font-semibold">No messages yet. Say hello to your doctor!</p>
+              <div className="h-full flex flex-col justify-center items-center text-brand-mute">
+                <MessageCircle size={36} className="text-brand-stone mb-2" />
+                <p className="text-xs font-bold">No messages yet. Say hello to your doctor!</p>
               </div>
             ) : (
               messages.map(msg => {
@@ -113,19 +113,19 @@ export default function PatientMessages() {
                     className={`flex ${isPatientSender ? 'justify-end' : 'justify-start'}`}
                   >
                     <div 
-                      className={`max-w-[65%] p-3.5 rounded-2xl shadow-sm text-xs leading-relaxed ${
+                      className={`max-w-[65%] p-3.5 rounded-[16px] text-xs leading-relaxed ${
                         isPatientSender 
-                          ? 'bg-blue-600 text-white rounded-tr-none' 
-                          : 'bg-white text-slate-800 rounded-tl-none border border-slate-200/50'
+                          ? 'bg-brand-primary text-white rounded-tr-none' 
+                          : 'bg-brand-canvas text-brand-body rounded-tl-none border border-brand-hairlineSoft'
                       }`}
                     >
                       <p>{msg.text}</p>
                       <div className="flex items-center justify-end gap-1 mt-1 text-[9px]">
-                        <span className={isPatientSender ? 'text-blue-100' : 'text-slate-400'}>
+                        <span className={isPatientSender ? 'text-white/70' : 'text-brand-mute'}>
                           {new Date(msg.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                         </span>
                         {isPatientSender && (
-                          msg.isRead ? <CheckCheck size={12} className="text-blue-100" /> : <Check size={12} className="text-blue-200" />
+                          msg.isRead ? <CheckCheck size={12} className="text-white/90" /> : <Check size={12} className="text-white/70" />
                         )}
                       </div>
                     </div>
@@ -137,7 +137,7 @@ export default function PatientMessages() {
           </div>
 
           {/* Textarea input */}
-          <form onSubmit={handleSend} className="bg-white border-t border-slate-200 p-4 flex gap-2.5">
+          <form onSubmit={handleSend} className="bg-brand-canvas border-t border-brand-hairlineSoft p-4 flex gap-2.5">
             <input
               type="text"
               placeholder="Message your clinician..."
@@ -149,7 +149,7 @@ export default function PatientMessages() {
             <button
               type="submit"
               disabled={sending || !text.trim()}
-              className="btn-brand-primary py-2.5 px-6 shadow-md shadow-blue-100"
+              className="btn-brand-primary py-2.5 px-6 shadow-none"
             >
               <Send size={16} />
             </button>
@@ -157,42 +157,42 @@ export default function PatientMessages() {
         </div>
 
         {/* Right pane: Doctor profile summary */}
-        <div className="w-80 border-l border-slate-200 p-6 hidden lg:block bg-white space-y-6">
+        <div className="w-80 border-l border-brand-hairlineSoft p-6 hidden lg:block bg-brand-canvas space-y-6">
           <div>
-            <span className="text-[10px] font-extrabold tracking-widest text-slate-400 uppercase block mb-3">
+            <span className="text-[10px] font-extrabold tracking-widest text-brand-mute uppercase block mb-3">
               Assigned Clinician
             </span>
-            <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-2xl border border-slate-100">
-              <div className="w-12 h-12 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center font-extrabold text-base border border-blue-200/40">
+            <div className="flex items-center gap-3 p-4 bg-brand-surfaceSoft rounded-[16px] border border-brand-hairlineSoft">
+              <div className="w-12 h-12 rounded-[16px] bg-brand-surfaceCard text-brand-charcoal flex items-center justify-center font-extrabold text-base border border-brand-hairlineSoft">
                 {docInitials}
               </div>
               <div className="overflow-hidden">
-                <h4 className="font-extrabold text-xs text-slate-900 truncate">{doctor?.name}</h4>
-                <p className="text-[9px] text-slate-400 font-bold uppercase tracking-wider mt-0.5">Surgeon / Physio</p>
+                <h4 className="font-extrabold text-xs text-brand-ink truncate">{doctor?.name}</h4>
+                <p className="text-[9px] text-brand-mute font-bold uppercase tracking-wider mt-0.5">Surgeon / Physio</p>
               </div>
             </div>
           </div>
 
-          <div className="space-y-4 text-xs font-semibold text-slate-700">
+          <div className="space-y-4 text-xs font-semibold text-brand-charcoal">
             <div>
-              <span className="text-[10px] text-slate-400 uppercase tracking-widest font-extrabold block mb-1">Email</span>
-              <span className="text-slate-900">{doctor?.email}</span>
+              <span className="text-[10px] text-brand-mute uppercase tracking-widest font-extrabold block mb-1">Email</span>
+              <span className="text-brand-ink font-bold">{doctor?.email}</span>
             </div>
 
             <div>
-              <span className="text-[10px] text-slate-400 uppercase tracking-widest font-extrabold block mb-1">Support Clinic</span>
-              <span className="text-slate-900">Elite Sports Physiotherapy Center</span>
+              <span className="text-[10px] text-brand-mute uppercase tracking-widest font-extrabold block mb-1">Support Clinic</span>
+              <span className="text-brand-ink font-bold">Elite Sports Physiotherapy Center</span>
             </div>
 
             <div>
-              <span className="text-[10px] text-slate-400 uppercase tracking-widest font-extrabold block mb-1">Medical Hours</span>
-              <span className="text-slate-900">Mon - Fri • 9:00 AM - 5:00 PM</span>
+              <span className="text-[10px] text-brand-mute uppercase tracking-widest font-extrabold block mb-1">Medical Hours</span>
+              <span className="text-brand-ink font-bold">Mon - Fri • 9:00 AM - 5:00 PM</span>
             </div>
           </div>
 
-          <div className="border-t border-slate-100 pt-6 space-y-2.5">
-            <div className="p-3 bg-blue-50/50 border border-blue-50 text-[11px] leading-relaxed rounded-xl text-blue-800 flex gap-2 items-start font-medium">
-              <Heart size={14} className="mt-0.5 text-blue-600 flex-shrink-0" />
+          <div className="border-t border-brand-hairlineSoft pt-6 space-y-2.5">
+            <div className="p-3 bg-brand-primary/5 border border-brand-primary/10 text-[11px] leading-relaxed rounded-[16px] text-brand-primary flex gap-2 items-start font-bold">
+              <Heart size={14} className="mt-0.5 text-brand-primary flex-shrink-0" />
               <span>Use this channel to notify your clinician about knee flexion pain, debridement complications, or wound swelling concerns.</span>
             </div>
           </div>

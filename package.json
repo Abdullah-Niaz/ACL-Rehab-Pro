@@ -4,8 +4,10 @@
   "private": true,
   "scripts": {
     "install-all": "cd backend && npm install && cd ../frontend && npm install",
-    "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm run dev\"",
+    "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm run dev\" \"vite build\"",
     "seed": "cd backend && npm run seed"
   },
-  "devDependencies": {"concurrently": "^9.1.2"}
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
 }

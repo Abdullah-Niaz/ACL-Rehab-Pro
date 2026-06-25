@@ -110,13 +110,13 @@ export default function DoctorAnalytics() {
     <Layout role="doctor">
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
         <div>
-          <h2 className="text-3xl font-extrabold tracking-tight text-slate-900">Clinic Reports & Analytics</h2>
-          <p className="text-xs text-slate-500 mt-1">Aggregated statistics, rehabilitation compliance, and return-to-sport metrics.</p>
+          <h2 className="text-3xl font-black tracking-tighter text-brand-ink">Clinic Reports & Analytics</h2>
+          <p className="text-xs text-brand-mute mt-1">Aggregated statistics, rehabilitation compliance, and return-to-sport metrics.</p>
         </div>
 
         <button 
           onClick={exportCSV}
-          className="btn-brand-primary flex items-center gap-2 py-3 px-5 text-white font-semibold shadow-md shadow-blue-100 self-start"
+          className="btn-brand-primary flex items-center gap-2 py-3 px-5 shadow-none self-start"
         >
           <Download size={18} />
           Export Patient CSV
@@ -157,15 +157,26 @@ export default function DoctorAnalytics() {
         
         {/* Phase Distribution Chart */}
         <div className="card-premium">
-          <h3 className="font-bold text-slate-800 text-base mb-4">Patient Distribution by Rehab Phase</h3>
+          <h3 className="font-extrabold text-brand-ink text-base mb-4 tracking-tight">Patient Distribution by Rehab Phase</h3>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={analytics.phaseChartData} margin={{ top: 10, right: 5, left: -25, bottom: 0 }}>
-                <CartesianGrid stroke="#f8fafc" strokeDasharray="3 3" vertical={false} />
-                <XAxis dataKey="name" style={{ fontSize: 10, fill: '#94a3b8', fontWeight: 600 }} tickLine={false} axisLine={false} />
-                <YAxis style={{ fontSize: 10, fill: '#94a3b8', fontWeight: 600 }} tickLine={false} axisLine={false} />
-                <Tooltip cursor={{ fill: 'transparent' }} />
-                <Bar dataKey="Count" fill="#2563EB" radius={[6, 6, 0, 0]} maxBarSize={45} />
+                <CartesianGrid stroke="#e5e5e0" strokeDasharray="3 3" vertical={false} />
+                <XAxis dataKey="name" style={{ fontSize: 10, fill: '#62625b', fontWeight: 600 }} tickLine={false} axisLine={false} dy={8} />
+                <YAxis style={{ fontSize: 10, fill: '#62625b', fontWeight: 600 }} tickLine={false} axisLine={false} dx={-8} />
+                <Tooltip 
+                  cursor={{ fill: 'transparent' }} 
+                  contentStyle={{ 
+                    backgroundColor: '#ffffff', 
+                    borderColor: '#e5e5e0', 
+                    borderRadius: '16px',
+                    fontSize: '11px',
+                    fontFamily: 'Inter, sans-serif',
+                    fontWeight: 'bold',
+                    boxShadow: 'none'
+                  }}
+                />
+                <Bar dataKey="Count" fill="#103c25" radius={[6, 6, 0, 0]} maxBarSize={45} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -173,13 +184,13 @@ export default function DoctorAnalytics() {
 
         {/* Clinical logs/checkin volume over time */}
         <div className="card-premium">
-          <h3 className="font-bold text-slate-800 text-base mb-4">Log Submission Frequency by Month</h3>
+          <h3 className="font-extrabold text-brand-ink text-base mb-4 tracking-tight">Log Submission Frequency by Month</h3>
           {analytics.logChartData.length === 0 ? (
-            <div className="h-64 flex items-center justify-center text-slate-400 font-medium">
+            <div className="h-64 flex items-center justify-center text-brand-mute font-medium">
               No historical entries submitted yet.
             </div>
           ) : (
-            <TrendLine data={analytics.logChartData} keyName="Checkins" label="Logs Submitted" strokeColor="#10B981" />
+            <TrendLine data={analytics.logChartData} keyName="Checkins" label="Logs Submitted" strokeColor="#e60023" />
           )}
         </div>
 

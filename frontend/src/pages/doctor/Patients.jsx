@@ -116,13 +116,13 @@ export default function Patients() {
     <Layout role="doctor">
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
         <div>
-          <h2 className="text-3xl font-extrabold tracking-tight text-slate-900">Patients Directory</h2>
-          <p className="text-xs text-slate-500 mt-1">Manage physical parameters, plans, and messaging profiles.</p>
+          <h2 className="text-3xl font-extrabold tracking-tighter text-brand-ink">Patients Directory</h2>
+          <p className="text-xs text-brand-mute mt-1">Manage physical parameters, plans, and messaging profiles.</p>
         </div>
         
         <Link 
           to="/doctor/patients/new" 
-          className="btn-brand-primary self-start flex items-center gap-2 py-3 px-5 text-white font-semibold shadow-md shadow-blue-100"
+          className="btn-brand-primary self-start flex items-center gap-2 py-3 px-5 text-white font-bold shadow-none"
         >
           <UserPlus size={18} />
           Add Patient
@@ -130,15 +130,15 @@ export default function Patients() {
       </div>
 
       {/* Filters & search panel */}
-      <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-premium mb-6 flex flex-col md:flex-row gap-4 items-center justify-between select-none">
+      <div className="bg-brand-canvas p-4 rounded-[16px] border border-brand-hairlineSoft mb-6 flex flex-col md:flex-row gap-4 items-center justify-between select-none shadow-none">
         
         {/* Search Input */}
         <div className="relative w-full md:w-80">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-brand-ash" size={18} />
           <input
             type="text"
             placeholder="Search by patient name or email..."
-            className="input-premium pl-10"
+            className="w-full rounded-full border border-brand-hairlineSoft bg-brand-surfaceCard pl-11 pr-4 py-2.5 text-sm outline-none transition-all placeholder:text-brand-ash focus:bg-brand-canvas focus:ring-4 focus:ring-brand-focusOuter/15"
             value={search}
             onChange={(e) => { setSearch(e.target.value); setCurrentPage(1); }}
           />
@@ -147,9 +147,9 @@ export default function Patients() {
         {/* Action Filters dropdowns */}
         <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto items-center">
           <div className="flex items-center gap-2 w-full sm:w-auto">
-            <Filter size={16} className="text-slate-400" />
+            <Filter size={16} className="text-brand-mute" />
             <select
-              className="input-premium py-2 text-xs font-semibold text-slate-700 bg-slate-50"
+              className="w-full sm:w-auto rounded-full border border-brand-hairlineSoft bg-brand-surfaceCard px-4 py-2 text-xs font-bold text-brand-charcoal outline-none transition-all focus:border-brand-ink focus:ring-4 focus:ring-brand-focusOuter/15 cursor-pointer"
               value={sportFilter}
               onChange={(e) => { setSportFilter(e.target.value); setCurrentPage(1); }}
             >
@@ -161,7 +161,7 @@ export default function Patients() {
           </div>
 
           <select
-            className="input-premium py-2 text-xs font-semibold text-slate-700 bg-slate-50 w-full sm:w-auto"
+            className="w-full sm:w-auto rounded-full border border-brand-hairlineSoft bg-brand-surfaceCard px-4 py-2 text-xs font-bold text-brand-charcoal outline-none transition-all focus:border-brand-ink focus:ring-4 focus:ring-brand-focusOuter/15 cursor-pointer"
             value={statusFilter}
             onChange={(e) => { setStatusFilter(e.target.value); setCurrentPage(1); }}
           >
@@ -173,27 +173,27 @@ export default function Patients() {
       </div>
 
       {loading ? (
-        <p className="animate-pulse">Loading active patient list...</p>
+        <p className="animate-pulse text-brand-mute font-bold">Loading active patient list...</p>
       ) : filteredPatients.length === 0 ? (
-        <div className="card-premium text-center py-16 text-slate-500 font-medium">
-          <p className="text-slate-400 mb-2">No patients matching filters found.</p>
+        <div className="card-premium text-center py-16 text-brand-mute font-bold shadow-none">
+          <p className="text-brand-ash mb-2 font-medium">No patients matching filters found.</p>
           <button 
             onClick={() => { setSearch(''); setSportFilter('All'); setStatusFilter('All'); }}
-            className="text-xs text-blue-600 font-bold hover:underline"
+            className="text-xs text-brand-primary font-bold hover:underline"
           >
             Clear all filters
           </button>
         </div>
       ) : (
         <div className="space-y-4">
-          <div className="card-premium p-0 border border-slate-200 overflow-hidden select-none">
+          <div className="card-premium p-0 border border-brand-hairlineSoft overflow-hidden select-none shadow-none bg-brand-canvas">
             <div className="overflow-x-auto">
               <table className="w-full text-sm text-left">
-                <thead className="bg-slate-50/80 border-b border-slate-100 text-slate-500 uppercase tracking-wider text-[10px] font-bold">
+                <thead className="bg-brand-surfaceCard border-b border-brand-hairlineSoft text-brand-mute uppercase tracking-wider text-[10px] font-bold">
                   <tr>
                     <th 
                       onClick={() => handleSort('name')} 
-                      className="p-4 font-extrabold cursor-pointer hover:bg-slate-100/50 transition"
+                      className="p-4 font-extrabold cursor-pointer hover:bg-brand-surfaceSoft/50 transition"
                     >
                       <div className="flex items-center gap-1.5">
                         Name
@@ -204,7 +204,7 @@ export default function Patients() {
                     <th className="p-4 font-extrabold">Graft Spec</th>
                     <th 
                       onClick={() => handleSort('symmetry')} 
-                      className="p-4 font-extrabold cursor-pointer hover:bg-slate-100/50 transition"
+                      className="p-4 font-extrabold cursor-pointer hover:bg-brand-surfaceSoft/50 transition"
                     >
                       <div className="flex items-center gap-1.5">
                         Quad Symmetry
@@ -213,7 +213,7 @@ export default function Patients() {
                     </th>
                     <th 
                       onClick={() => handleSort('phase')} 
-                      className="p-4 font-extrabold cursor-pointer hover:bg-slate-100/50 transition"
+                      className="p-4 font-extrabold cursor-pointer hover:bg-brand-surfaceSoft/50 transition"
                     >
                       <div className="flex items-center gap-1.5">
                         Current Phase
@@ -224,38 +224,50 @@ export default function Patients() {
                     <th className="p-4 font-extrabold text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
+                <tbody className="divide-y divide-brand-hairlineSoft">
                   {paginatedPatients.map((p) => {
                     const isUserActive = p.userId?.isActive;
                     const sym = quadSymmetry(p.operatedQuad, p.healthyQuad);
                     return (
-                      <tr key={p._id} className="hover:bg-slate-50/50 transition">
-                        <td className="p-4 font-bold text-slate-900">
-                          <Link className="text-blue-600 hover:text-blue-800" to={`/doctor/patients/${p._id}`}>
-                            {p.userId?.name}
-                          </Link>
-                          <span className="block text-xs font-normal text-slate-500 mt-0.5">{p.userId?.email}</span>
+                      <tr key={p._id} className="hover:bg-brand-surfaceSoft/30 transition">
+                        <td className="p-4 font-bold text-brand-ink">
+                          <div className="flex items-center flex-wrap gap-1.5">
+                            <Link className="text-brand-ink hover:text-brand-primary font-bold" to={`/doctor/patients/${p._id}`}>
+                              {p.userId?.name}
+                            </Link>
+                            {p.highRisk && (
+                              <span className="inline-flex items-center rounded-full bg-brand-error/10 text-brand-error text-[8px] font-black uppercase tracking-wider px-2 py-0.5 border border-brand-error/20">
+                                Risk Alert
+                              </span>
+                            )}
+                            {p.readyForProgression && (
+                              <span className="inline-flex items-center rounded-full bg-brand-successPale text-brand-successDeep text-[8px] font-black uppercase tracking-wider px-2 py-0.5 border border-brand-successDeep/10">
+                                Ready to Progress
+                              </span>
+                            )}
+                          </div>
+                          <span className="block text-xs font-semibold text-brand-mute mt-0.5">{p.userId?.email}</span>
                         </td>
-                        <td className="p-4 text-slate-600 font-semibold">{p.sport || 'N/A'}</td>
-                        <td className="p-4 text-slate-600 font-medium">
-                          <span className="text-xs text-slate-700 block">{p.graftType || 'N/A'}</span>
-                          <span className="text-[10px] text-slate-400 block mt-0.5">{p.graftSize || 'N/A'}</span>
+                        <td className="p-4 text-brand-charcoal font-bold">{p.sport || 'N/A'}</td>
+                        <td className="p-4 text-brand-charcoal font-semibold">
+                          <span className="text-xs text-brand-charcoal block">{p.graftType || 'N/A'}</span>
+                          <span className="text-[10px] text-brand-mute block mt-0.5 font-bold">{p.graftSize || 'N/A'}</span>
                         </td>
                         <td className="p-4 font-extrabold">
-                          <span className={`inline-flex items-center rounded-lg px-2.5 py-0.5 text-xs font-bold ${
-                            sym >= 90 ? 'bg-emerald-50 text-emerald-700' : sym >= 75 ? 'bg-amber-50 text-amber-700' : 'bg-red-50 text-red-700'
+                          <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-bold border ${
+                            sym >= 90 ? 'bg-brand-successPale text-brand-successDeep border-brand-successDeep/10' : sym >= 75 ? 'bg-amber-50 text-amber-800 border-amber-200/50' : 'bg-brand-error/10 text-brand-error border-brand-error/20'
                           }`}>
                             {sym}%
                           </span>
                         </td>
-                        <td className="p-4 text-slate-600 font-bold">Phase {p.currentPhase} <span className="text-xs font-normal text-slate-400">(W{p.currentWeek})</span></td>
+                        <td className="p-4 text-brand-charcoal font-bold">Phase {p.currentPhase} <span className="text-xs font-semibold text-brand-mute">(W{p.currentWeek})</span></td>
                         <td className="p-4">
                           {isUserActive ? (
-                            <span className="badge-success text-[10px] uppercase font-extrabold">
+                            <span className="badge-success text-[10px] uppercase font-extrabold border-brand-successDeep/10">
                               Active
                             </span>
                           ) : (
-                            <span className="badge-warning text-[10px] uppercase font-extrabold animate-pulse">
+                            <span className="badge-warning text-[10px] uppercase font-extrabold animate-pulse border-amber-200/55">
                               Pending Setup
                             </span>
                           )}
@@ -265,7 +277,7 @@ export default function Patients() {
                             <Link 
                               title="Daily Recovery Logs"
                               to={`/doctor/patients/${p._id}/progress`}
-                              className="p-2 border border-slate-200/80 rounded-xl bg-white hover:bg-slate-50 text-slate-500 hover:text-slate-800 transition"
+                              className="p-2 border border-brand-hairlineSoft rounded-[16px] bg-brand-canvas hover:bg-brand-surfaceCard text-brand-charcoal transition"
                             >
                               <LineChart size={15} />
                             </Link>
@@ -273,28 +285,28 @@ export default function Patients() {
                             <Link 
                               title="Rehabilitation Plan"
                               to={`/doctor/patients/${p.userId?._id}/plan`}
-                              className="p-2 border border-slate-200/80 rounded-xl bg-white hover:bg-slate-50 text-slate-500 hover:text-slate-800 transition"
+                              className="p-2 border border-brand-hairlineSoft rounded-[16px] bg-brand-canvas hover:bg-brand-surfaceCard text-brand-charcoal transition"
                             >
                               <FileText size={15} />
                             </Link>
-
+ 
                             <Link 
                               title="Secure Message Thread"
                               to={`/doctor/messages/${p.userId?._id}`}
-                              className="p-2 border border-slate-200/80 rounded-xl bg-white hover:bg-slate-50 text-slate-500 hover:text-slate-800 transition relative"
+                              className="p-2 border border-brand-hairlineSoft rounded-[16px] bg-brand-canvas hover:bg-brand-surfaceCard text-brand-charcoal transition relative"
                             >
                               <MessageSquare size={15} />
                               {p.unreadMessagesCount > 0 && (
-                                <span className="absolute -top-1.5 -right-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-red-600 text-[9px] font-bold text-white shadow-sm border border-white">
+                                <span className="absolute -top-1.5 -right-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-brand-primary text-[9px] font-bold text-white border border-brand-canvas">
                                   {p.unreadMessagesCount}
                                 </span>
                               )}
                             </Link>
-
+ 
                             <Link 
                               title="Edit Clinical details"
                               to={`/doctor/patients/${p._id}/edit`}
-                              className="p-2 border border-slate-200/80 rounded-xl bg-white hover:bg-slate-50 text-slate-500 hover:text-slate-800 transition"
+                              className="p-2 border border-brand-hairlineSoft rounded-[16px] bg-brand-canvas hover:bg-brand-surfaceCard text-brand-charcoal transition"
                             >
                               <Edit size={15} />
                             </Link>
@@ -310,20 +322,20 @@ export default function Patients() {
 
           {/* Table pagination triggers */}
           {totalPages > 1 && (
-            <div className="flex justify-between items-center text-xs font-semibold text-slate-500 px-1 select-none">
+            <div className="flex justify-between items-center text-xs font-bold text-brand-mute px-1 select-none">
               <span>Showing Page {currentPage} of {totalPages}</span>
               <div className="flex gap-2">
                 <button
                   onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                   disabled={currentPage === 1}
-                  className="p-2 border border-slate-200 rounded-xl bg-white hover:bg-slate-50 disabled:opacity-50 transition"
+                  className="p-2 border border-brand-hairlineSoft rounded-[16px] bg-brand-canvas hover:bg-brand-surfaceCard disabled:opacity-30 transition"
                 >
                   <ChevronLeft size={16} />
                 </button>
                 <button
                   onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
                   disabled={currentPage === totalPages}
-                  className="p-2 border border-slate-200 rounded-xl bg-white hover:bg-slate-50 disabled:opacity-50 transition"
+                  className="p-2 border border-brand-hairlineSoft rounded-[16px] bg-brand-canvas hover:bg-brand-surfaceCard disabled:opacity-30 transition"
                 >
                   <ChevronRight size={16} />
                 </button>

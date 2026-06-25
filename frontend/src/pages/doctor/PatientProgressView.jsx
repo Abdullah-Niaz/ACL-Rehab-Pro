@@ -53,12 +53,12 @@ export default function PatientProgressView() {
       <div className="flex justify-between items-center mb-6">
         <button 
           onClick={() => navigate(-1)} 
-          className="flex items-center gap-1 text-slate-600 hover:text-slate-900 transition font-medium"
+          className="flex items-center gap-1 text-brand-mute hover:text-brand-ink transition font-bold"
         >
           <ChevronLeft size={18} />
           Patient Details
         </button>
-        <h2 className="text-2xl font-bold">
+        <h2 className="text-2xl font-extrabold text-brand-ink tracking-tighter">
           {patientName}'s Daily Logs
         </h2>
       </div>
@@ -66,43 +66,43 @@ export default function PatientProgressView() {
       <div className="grid lg:grid-cols-3 gap-6">
         {/* Timeline Log Feed */}
         <div className="lg:col-span-2 space-y-4">
-          <h3 className="font-bold text-lg text-slate-800 mb-2">Logs History ({logs.length})</h3>
+          <h3 className="font-extrabold text-lg text-brand-ink mb-2 tracking-tighter">Logs History ({logs.length})</h3>
           
           {logs.length === 0 ? (
-            <div className="card-premium text-center py-8 text-slate-500 font-medium">
+            <div className="card-premium text-center py-8 text-brand-mute font-bold shadow-none">
               No daily progress logs submitted yet.
             </div>
           ) : (
             logs.map(log => (
-              <div key={log._id} className="card-premium hover:shadow-md transition">
-                <div className="flex justify-between border-b pb-3 mb-3">
-                  <div className="flex items-center gap-2 text-slate-600 font-semibold text-sm">
-                    <Calendar size={16} className="text-blue-600" />
+              <div key={log._id} className="card-premium shadow-none border-brand-hairlineSoft bg-brand-canvas transition">
+                <div className="flex justify-between border-b border-brand-hairlineSoft pb-3 mb-3">
+                  <div className="flex items-center gap-2 text-brand-charcoal font-bold text-sm">
+                    <Calendar size={16} className="text-brand-primary" />
                     {new Date(log.date).toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
                   </div>
-                  <span className="pill bg-slate-100 text-slate-600 text-xs font-semibold">
+                  <span className="rounded-full bg-brand-surfaceCard text-brand-charcoal text-xs font-bold px-2.5 py-0.5 border border-brand-hairlineSoft">
                     Phase {log.phaseNumber || patient.currentPhase} • Week {log.weekNumber || patient.currentWeek}
                   </span>
                 </div>
 
                 <div className="grid md:grid-cols-3 gap-4 text-sm mb-4">
-                  <div className="bg-slate-50 p-3 rounded-xl">
-                    <span className="text-xs text-slate-500 block">Flexion / Extension</span>
-                    <span className="font-bold text-slate-800 text-base">
+                  <div className="bg-brand-surfaceSoft p-3 rounded-[16px] border border-brand-hairlineSoft">
+                    <span className="text-xs text-brand-mute block">Flexion / Extension</span>
+                    <span className="font-bold text-brand-charcoal text-base">
                       {log.measurements?.flexion}° / {log.measurements?.extension}°
                     </span>
                   </div>
                   
-                  <div className="bg-slate-50 p-3 rounded-xl">
-                    <span className="text-xs text-slate-500 block">Quad Sizes (Op / Healthy)</span>
-                    <span className="font-bold text-slate-800 text-base">
+                  <div className="bg-brand-surfaceSoft p-3 rounded-[16px] border border-brand-hairlineSoft">
+                    <span className="text-xs text-brand-mute block">Quad Sizes (Op / Healthy)</span>
+                    <span className="font-bold text-brand-charcoal text-base">
                       {log.measurements?.operatedQuadSize} / {log.measurements?.healthyQuadSize}
                     </span>
                   </div>
 
-                  <div className="bg-slate-50 p-3 rounded-xl">
-                    <span className="text-xs text-slate-500 block">Scores (Recovery / Conf)</span>
-                    <span className="font-bold text-slate-800 text-base">
+                  <div className="bg-brand-surfaceSoft p-3 rounded-[16px] border border-brand-hairlineSoft">
+                    <span className="text-xs text-brand-mute block">Scores (Recovery / Conf)</span>
+                    <span className="font-bold text-brand-charcoal text-base">
                       {log.recoveryScore ?? '-'}% / {log.confidenceScore ?? '-'}%
                     </span>
                   </div>
@@ -110,21 +110,21 @@ export default function PatientProgressView() {
 
                 {log.exerciseLogs && log.exerciseLogs.length > 0 && (
                   <div className="mt-2">
-                    <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-2">Exercise Outcomes</span>
+                    <span className="text-xs font-bold text-brand-mute uppercase tracking-wider block mb-2">Exercise Outcomes</span>
                     <div className="space-y-2">
                       {log.exerciseLogs.map((ex, idx) => (
-                        <div key={idx} className="bg-blue-50/50 border border-blue-50/70 p-3 rounded-xl flex flex-col md:flex-row justify-between gap-2">
+                        <div key={idx} className="bg-brand-primary/5 border border-brand-primary/10 p-3 rounded-[16px] flex flex-col md:flex-row justify-between gap-2">
                           <div>
-                            <span className="font-bold text-slate-900 block text-sm">{ex.exerciseName}</span>
-                            {ex.notes && <p className="text-slate-600 text-xs mt-1 italic">"{ex.notes}"</p>}
+                            <span className="font-bold text-brand-ink block text-sm">{ex.exerciseName}</span>
+                            {ex.notes && <p className="text-brand-charcoal text-xs mt-1 italic font-semibold">"{ex.notes}"</p>}
                           </div>
-                          <div className="flex gap-3 text-xs font-semibold text-slate-700 items-center">
-                            <span className={`pill ${ex.completed ? 'bg-emerald-50 text-emerald-700' : 'bg-red-50 text-red-700'}`}>
+                          <div className="flex gap-3 text-xs font-semibold text-brand-charcoal items-center">
+                            <span className={`rounded-full px-2.5 py-0.5 text-[10px] font-extrabold border ${ex.completed ? 'bg-brand-successPale text-brand-successDeep border-brand-successDeep/10' : 'bg-brand-error/10 text-brand-error border-brand-error/20'}`}>
                               {ex.completed ? 'Completed' : 'Missed'}
                             </span>
-                            <span>Pain: <b className="text-blue-700">{ex.painScore}/10</b></span>
-                            <span>Swelling: <b className="text-blue-700">{ex.swellingScore}/10</b></span>
-                            <span>Diff: <b className="text-blue-700">{ex.difficultyScore}/10</b></span>
+                            <span>Pain: <b className="text-brand-primary font-bold">{ex.painScore}/10</b></span>
+                            <span>Swelling: <b className="text-brand-primary font-bold">{ex.swellingScore}/10</b></span>
+                            <span>Diff: <b className="text-brand-primary font-bold">{ex.difficultyScore}/10</b></span>
                           </div>
                         </div>
                       ))}
@@ -138,23 +138,23 @@ export default function PatientProgressView() {
 
         {/* Sidebar Mini Summary */}
         <div className="space-y-6">
-          <div className="card-premium bg-slate-50/60 border-none shadow-none">
-            <h3 className="font-bold text-lg text-slate-800 mb-3">Rehab Context</h3>
+          <div className="card-premium bg-brand-surfaceCard border border-brand-hairlineSoft shadow-none">
+            <h3 className="font-extrabold text-lg text-brand-ink mb-3 tracking-tighter">Rehab Context</h3>
             
-            <div className="space-y-3 text-sm">
-              <p><span className="text-slate-500">Sport:</span> <b className="text-slate-800">{patient.sport || 'Not set'}</b></p>
-              <p><span className="text-slate-500">Graft details:</span> <b className="text-slate-800">{patient.graftType} ({patient.graftSize})</b></p>
+            <div className="space-y-3 text-sm font-semibold text-brand-charcoal">
+              <p><span className="text-brand-mute">Sport:</span> <b className="text-brand-charcoal">{patient.sport || 'Not set'}</b></p>
+              <p><span className="text-brand-mute">Graft details:</span> <b className="text-brand-charcoal">{patient.graftType} ({patient.graftSize})</b></p>
               <p>
-                <span className="text-slate-500">Surgery:</span>{' '}
-                <b className="text-slate-800">
+                <span className="text-brand-mute">Surgery:</span>{' '}
+                <b className="text-brand-charcoal">
                   {patient.surgeryDate ? new Date(patient.surgeryDate).toLocaleDateString() : 'N/A'}
                 </b>
               </p>
-              <p><span className="text-slate-500">Notes:</span> <span className="text-slate-600 block bg-white p-3 rounded-xl border border-slate-100 mt-1">{patient.notes || 'No general notes.'}</span></p>
+              <p><span className="text-brand-mute">Notes:</span> <span className="text-brand-charcoal block bg-brand-canvas p-3 rounded-[16px] border border-brand-hairlineSoft mt-1 font-semibold">{patient.notes || 'No general notes.'}</span></p>
             </div>
             
             <Link 
-              className="btn-brand-primary w-full py-3 text-center block mt-4" 
+              className="btn-brand-primary w-full py-3 text-center block mt-4 font-bold shadow-none" 
               to={`/doctor/patients/${patient.userId?._id}/plan`}
             >
               Adjust Rehab Plan

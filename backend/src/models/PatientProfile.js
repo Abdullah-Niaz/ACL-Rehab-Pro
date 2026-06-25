@@ -20,6 +20,7 @@ const schema = new mongoose.Schema({
   tunnelPlacement: String,
   complications: String,
   debridementDate: Date,
+  debridementDate2: Date,
   suturesRemovalDate: Date,
   currentFlexion: Number,
   healthyFlexion: Number,
@@ -27,7 +28,9 @@ const schema = new mongoose.Schema({
   healthyQuad: Number,
   notes: String,
   currentPhase: { type: Number, default: 1 },
-  currentWeek: { type: Number, default: 1 }
+  currentWeek: { type: Number, default: 1 },
+  readyForProgression: { type: Boolean, default: false },
+  highRisk: { type: Boolean, default: false }
 }, { timestamps: true });
 
 export default mongoose.model('PatientProfile', schema);

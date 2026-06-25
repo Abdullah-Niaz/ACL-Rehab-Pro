@@ -91,27 +91,27 @@ export default function PatientMeasurements() {
 
   return (
     <Layout role="patient">
-      <h2 className="text-2xl font-bold mb-5 flex items-center gap-2">
-        <Ruler className="text-blue-600" />
+      <h2 className="text-2xl font-extrabold text-brand-ink mb-5 flex items-center gap-2 tracking-tighter">
+        <Ruler className="text-brand-primary" />
         Log My Measurements
       </h2>
 
       <div className="max-w-2xl space-y-6">
         {error && (
-          <div className="bg-red-50 text-red-700 p-4 rounded-xl border border-red-100 text-sm font-medium">
+          <div className="bg-brand-error/10 text-brand-error p-4 rounded-[16px] border border-brand-error/20 text-sm font-bold">
             {error}
           </div>
         )}
 
         {success && (
-          <div className="bg-emerald-50 text-emerald-700 p-4 rounded-xl border border-emerald-100 text-sm font-medium flex gap-2 items-center">
+          <div className="bg-brand-successPale text-brand-successDeep p-4 rounded-[16px] border border-brand-successDeep/10 text-sm font-bold flex gap-2 items-center">
             <CheckCircle size={16} />
             {success}
           </div>
         )}
 
         <form onSubmit={handleSubmit} className="card-premium space-y-5">
-          <p className="text-slate-600 text-sm">
+          <p className="text-brand-charcoal text-sm font-semibold">
             Keep track of your knee flexion degrees and bilateral quad circumference. These metrics help compute your symmetry percentages.
           </p>
 
@@ -174,7 +174,7 @@ export default function PatientMeasurements() {
           <button
             type="submit"
             disabled={saving}
-            className="btn-brand-primary w-full py-3 flex items-center justify-center gap-2 font-semibold text-white mt-4"
+            className="btn-brand-primary w-full py-3 flex items-center justify-center gap-2 font-bold text-white mt-4"
           >
             {saving ? (
               <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>

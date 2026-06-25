@@ -120,28 +120,28 @@ export default function ProgressEntry() {
   return (
     <Layout role="patient">
       <div className="mb-6">
-        <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">Log Today's Workout</h2>
-        <p className="text-xs text-slate-500 mt-1">Record your clinical stats, flexion range, swelling index, and recovery notes.</p>
+        <h2 className="text-3xl font-extrabold text-brand-ink tracking-tighter">Log Today's Workout</h2>
+        <p className="text-xs text-brand-mute mt-1">Record your clinical stats, flexion range, swelling index, and recovery notes.</p>
       </div>
 
       <form onSubmit={submit} className="max-w-4xl space-y-6 select-none">
         
         {msg && (
-          <div className="bg-emerald-50 text-emerald-700 p-4 rounded-xl border border-emerald-100 text-sm font-semibold flex items-center gap-2">
+          <div className="bg-brand-successPale text-brand-successDeep p-4 rounded-[16px] border border-brand-successDeep/10 text-sm font-bold flex items-center gap-2">
             <Check size={16} />
             {msg}
           </div>
         )}
 
         {error && (
-          <div className="bg-red-50 text-red-700 p-4 rounded-xl border border-red-100 text-sm font-semibold">
+          <div className="bg-brand-error/10 text-brand-error p-4 rounded-[16px] border border-brand-error/20 text-sm font-bold">
             {error}
           </div>
         )}
 
         {/* Section 1: Subjective Recovery (Sliders) */}
         <div className="card-premium space-y-5">
-          <h3 className="font-bold text-slate-800 text-sm uppercase tracking-wider border-b pb-2">
+          <h3 className="font-bold text-brand-ink text-sm uppercase tracking-wider border-b border-brand-hairlineSoft pb-2">
             1. Subjective Recovery Indicators
           </h3>
 
@@ -149,9 +149,13 @@ export default function ProgressEntry() {
             {/* Pain Slider */}
             <div>
               <div className="flex justify-between items-center mb-2">
-                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Pain Score</label>
-                <span className={`text-xs font-bold rounded-lg px-2 py-0.5 ${
-                  form.painScore <= 3 ? 'bg-emerald-50 text-emerald-700' : form.painScore <= 7 ? 'bg-amber-50 text-amber-700' : 'bg-red-50 text-red-700'
+                <label className="text-xs font-bold text-brand-charcoal uppercase tracking-wider">Pain Score</label>
+                <span className={`text-xs font-bold border rounded-full px-2.5 py-0.5 ${
+                  form.painScore <= 3 
+                    ? 'bg-brand-successPale text-brand-successDeep border-brand-successDeep/10' 
+                    : form.painScore <= 7 
+                      ? 'bg-amber-50 text-amber-800 border-amber-200/50' 
+                      : 'bg-brand-error/10 text-brand-error border-brand-error/20'
                 }`}>
                   {form.painScore}/10 ({getPainLabel(form.painScore)})
                 </span>
@@ -162,16 +166,20 @@ export default function ProgressEntry() {
                 max="10"
                 value={form.painScore}
                 onChange={(e) => setForm({ ...form, painScore: +e.target.value })}
-                className="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                className="w-full h-2 bg-brand-secondaryBg rounded-full appearance-none cursor-pointer accent-brand-primary"
               />
             </div>
 
             {/* Swelling Slider */}
             <div>
               <div className="flex justify-between items-center mb-2">
-                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Joint Swelling Score</label>
-                <span className={`text-xs font-bold rounded-lg px-2 py-0.5 ${
-                  form.swellingScore <= 3 ? 'bg-emerald-50 text-emerald-700' : form.swellingScore <= 7 ? 'bg-amber-50 text-amber-700' : 'bg-red-50 text-red-700'
+                <label className="text-xs font-bold text-brand-charcoal uppercase tracking-wider">Joint Swelling Score</label>
+                <span className={`text-xs font-bold border rounded-full px-2.5 py-0.5 ${
+                  form.swellingScore <= 3 
+                    ? 'bg-brand-successPale text-brand-successDeep border-brand-successDeep/10' 
+                    : form.swellingScore <= 7 
+                      ? 'bg-amber-50 text-amber-800 border-amber-200/50' 
+                      : 'bg-brand-error/10 text-brand-error border-brand-error/20'
                 }`}>
                   {form.swellingScore}/10 ({getSwellingLabel(form.swellingScore)})
                 </span>
@@ -182,16 +190,20 @@ export default function ProgressEntry() {
                 max="10"
                 value={form.swellingScore}
                 onChange={(e) => setForm({ ...form, swellingScore: +e.target.value })}
-                className="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                className="w-full h-2 bg-brand-secondaryBg rounded-full appearance-none cursor-pointer accent-brand-primary"
               />
             </div>
 
             {/* Difficulty Slider */}
             <div>
               <div className="flex justify-between items-center mb-2">
-                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Workout Difficulty Score</label>
-                <span className={`text-xs font-bold rounded-lg px-2 py-0.5 ${
-                  form.difficultyScore <= 3 ? 'bg-emerald-50 text-emerald-700' : form.difficultyScore <= 7 ? 'bg-amber-50 text-amber-700' : 'bg-red-50 text-red-700'
+                <label className="text-xs font-bold text-brand-charcoal uppercase tracking-wider">Workout Difficulty Score</label>
+                <span className={`text-xs font-bold border rounded-full px-2.5 py-0.5 ${
+                  form.difficultyScore <= 3 
+                    ? 'bg-brand-successPale text-brand-successDeep border-brand-successDeep/10' 
+                    : form.difficultyScore <= 7 
+                      ? 'bg-amber-50 text-amber-800 border-amber-200/50' 
+                      : 'bg-brand-error/10 text-brand-error border-brand-error/20'
                 }`}>
                   {form.difficultyScore}/10 ({getDifficultyLabel(form.difficultyScore)})
                 </span>
@@ -202,7 +214,7 @@ export default function ProgressEntry() {
                 max="10"
                 value={form.difficultyScore}
                 onChange={(e) => setForm({ ...form, difficultyScore: +e.target.value })}
-                className="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                className="w-full h-2 bg-brand-secondaryBg rounded-full appearance-none cursor-pointer accent-brand-primary"
               />
             </div>
           </div>
@@ -210,7 +222,7 @@ export default function ProgressEntry() {
 
         {/* Section 2: Physical Measurements */}
         <div className="card-premium space-y-4">
-          <h3 className="font-bold text-slate-800 text-sm uppercase tracking-wider border-b pb-2">
+          <h3 className="font-bold text-brand-ink text-sm uppercase tracking-wider border-b border-brand-hairlineSoft pb-2">
             2. Physical Measurements
           </h3>
           <div className="grid sm:grid-cols-3 gap-4">
@@ -256,7 +268,7 @@ export default function ProgressEntry() {
 
         {/* Section 3: Lifestyle & Metadata */}
         <div className="card-premium space-y-4">
-          <h3 className="font-bold text-slate-800 text-sm uppercase tracking-wider border-b pb-2">
+          <h3 className="font-bold text-brand-ink text-sm uppercase tracking-wider border-b border-brand-hairlineSoft pb-2">
             3. Lifestyle & Performance Stats
           </h3>
           <div className="grid sm:grid-cols-4 gap-4">
@@ -326,7 +338,7 @@ export default function ProgressEntry() {
         <button
           type="submit"
           disabled={submitting}
-          className="btn-brand-primary w-full py-4 flex justify-center items-center font-bold text-white shadow-lg shadow-blue-100"
+          className="btn-brand-primary w-full py-4 flex justify-center items-center font-bold text-white shadow-none"
         >
           {submitting ? (
             <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>

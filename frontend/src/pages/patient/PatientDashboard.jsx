@@ -90,26 +90,23 @@ export default function PatientDashboard() {
   return (
     <Layout role="patient">
       {/* 1. Welcoming Hero Banner Card */}
-      <div className="bg-gradient-to-br from-slate-900 via-slate-950 to-blue-950 text-white rounded-3xl p-6 md:p-8 border border-slate-900 shadow-xl mb-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 relative overflow-hidden select-none">
-        {/* Glow backdrop */}
-        <div className="absolute right-0 bottom-0 w-[40%] h-[120%] bg-blue-600/10 blur-[80px] rounded-full pointer-events-none"></div>
-
+      <div className="bg-brand-surfaceCard rounded-[32px] p-6 md:p-8 border border-brand-hairlineSoft mb-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 relative overflow-hidden select-none">
         <div className="space-y-2 relative z-10">
-          <span className="inline-flex items-center gap-1 text-[10px] uppercase font-bold tracking-widest text-blue-400 bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/15">
-            <Sparkles size={10} className="animate-spin" />
+          <span className="inline-flex items-center gap-1 text-[10px] uppercase font-bold tracking-widest text-brand-primary bg-brand-primary/10 px-3 py-1 rounded-full border border-brand-primary/15">
+            <Sparkles size={10} />
             Athlete Portal
           </span>
-          <h2 className="text-3xl font-extrabold tracking-tight text-slate-100">
+          <h2 className="text-3xl font-extrabold tracking-tighter text-brand-ink">
             Welcome back, {data.patient.user?.name}!
           </h2>
-          <p className="text-xs text-slate-400 max-w-md font-medium leading-relaxed">
-            You are currently in <b className="text-blue-300">Phase {data.patient.currentPhase}: {stats.activePhase?.title}</b>. Keep up the consistency to restoring full quad symmetry.
+          <p className="text-xs text-brand-charcoal max-w-md font-semibold leading-relaxed">
+            You are currently in <span className="text-brand-primary font-bold">Phase {data.patient.currentPhase}: {stats.activePhase?.title}</span>. Keep up the consistency to restoring full quad symmetry.
           </p>
         </div>
 
         <Link 
           to="/patient/progress"
-          className="btn-brand-primary py-3 px-6 text-white font-semibold flex items-center gap-2 relative z-10 shadow-lg shadow-blue-500/20 hover:scale-[1.02] active:scale-[0.98] transition"
+          className="btn-brand-primary py-3 px-6 text-white font-bold flex items-center gap-2 relative z-10 shadow-none hover:scale-[1.01] active:scale-[0.99] transition"
         >
           <Zap size={16} />
           Log Today's Workout
@@ -155,28 +152,28 @@ export default function PatientDashboard() {
         <div className="lg:col-span-2 card-premium flex flex-col justify-between">
           <div>
             <div className="flex justify-between items-start mb-2">
-              <h3 className="font-extrabold text-slate-900 text-lg">Return-To-Sport Symmetry Gauge</h3>
-              <span className="text-sm font-bold text-slate-500">{stats.sym}%</span>
+              <h3 className="font-extrabold text-brand-ink text-lg tracking-tighter">Return-To-Sport Symmetry Gauge</h3>
+              <span className="text-sm font-bold text-brand-mute">{stats.sym}%</span>
             </div>
             <ProgressBar value={stats.sym} />
-            <p className="text-xs text-slate-500 leading-relaxed mt-3">
-              Standard sports medicine criteria require <b className="text-slate-800">95%+ bilateral quadriceps and hamstrings index index symmetry</b> before returning to competitive contact football training.
+            <p className="text-xs text-brand-mute leading-relaxed mt-3">
+              Standard sports medicine criteria require <b className="text-brand-charcoal">95%+ bilateral quadriceps and hamstrings index symmetry</b> before returning to competitive contact football training.
             </p>
           </div>
 
-          <div className="border-t border-slate-100 pt-4 mt-6 flex justify-between items-center text-xs">
-            <span className="text-slate-500 font-semibold flex items-center gap-1">
-              <CheckCircle2 size={14} className="text-emerald-500" />
+          <div className="border-t border-brand-hairlineSoft pt-4 mt-6 flex justify-between items-center text-xs">
+            <span className="text-brand-mute font-bold flex items-center gap-1">
+              <CheckCircle2 size={14} className="text-brand-successDeep" />
               Sutures Removed
             </span>
-            <span className="text-slate-400">|</span>
-            <span className="text-slate-500 font-semibold flex items-center gap-1">
-              <CheckCircle2 size={14} className="text-emerald-500" />
+            <span className="text-brand-stone">|</span>
+            <span className="text-brand-mute font-bold flex items-center gap-1">
+              <CheckCircle2 size={14} className="text-brand-successDeep" />
               Graft Incorporated
             </span>
-            <span className="text-slate-400">|</span>
-            <span className="text-slate-500 font-semibold flex items-center gap-1">
-              <MessageCircle size={14} className="text-blue-500 animate-bounce" />
+            <span className="text-brand-stone">|</span>
+            <span className="text-brand-mute font-bold flex items-center gap-1">
+              <MessageCircle size={14} className="text-brand-primary" />
               Direct Surgeon Contact
             </span>
           </div>
@@ -184,26 +181,26 @@ export default function PatientDashboard() {
 
         {/* Today's Exercise checklist */}
         <div className="card-premium">
-          <h3 className="font-bold text-slate-800 text-base mb-4 flex justify-between items-center">
+          <h3 className="font-bold text-brand-ink text-base mb-4 flex justify-between items-center tracking-tight">
             Today's Exercises
-            <span className="text-xs text-slate-400 font-bold">Week {data.patient.currentWeek}</span>
+            <span className="text-xs text-brand-mute font-bold">Week {data.patient.currentWeek}</span>
           </h3>
 
           <div className="space-y-3 max-h-[170px] overflow-y-auto pr-1.5 custom-scrollbar">
             {stats.exercises.length === 0 ? (
-              <p className="text-xs text-slate-500 italic text-center py-4">No exercises assigned for this week yet.</p>
+              <p className="text-xs text-brand-mute italic text-center py-4">No exercises assigned for this week yet.</p>
             ) : (
               stats.exercises.map((ex, idx) => (
-                <div key={idx} className="flex items-center gap-2.5 bg-slate-50 p-2.5 rounded-xl border border-slate-100/80">
+                <div key={idx} className="flex items-center gap-2.5 bg-brand-surfaceSoft p-2.5 rounded-[16px] border border-brand-hairlineSoft">
                   <input 
                     type="checkbox" 
                     readOnly
                     checked={true}
-                    className="w-4 h-4 rounded text-blue-600 focus:ring-blue-500/20 accent-emerald-500 pointer-events-none"
+                    className="w-4 h-4 rounded text-brand-primary focus:ring-brand-focusOuter/20 accent-brand-primary pointer-events-none"
                   />
                   <div className="overflow-hidden">
-                    <span className="font-semibold text-xs text-slate-800 block truncate">{ex.name}</span>
-                    <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block mt-0.5">
+                    <span className="font-semibold text-xs text-brand-charcoal block truncate">{ex.name}</span>
+                    <span className="text-[10px] text-brand-mute font-bold uppercase tracking-wider block mt-0.5">
                       {ex.sets}x{ex.reps} • {ex.load}
                     </span>
                   </div>
@@ -214,7 +211,7 @@ export default function PatientDashboard() {
 
           <Link 
             to="/patient/plan" 
-            className="w-full text-center text-xs font-bold text-blue-600 hover:text-blue-800 transition block mt-4 flex items-center justify-center gap-0.5"
+            className="w-full text-center text-xs font-bold text-brand-primary hover:text-brand-primaryPressed transition block mt-4 flex items-center justify-center gap-0.5"
           >
             View Full Rehab Routine
             <ChevronRight size={14} />
@@ -226,12 +223,12 @@ export default function PatientDashboard() {
       {/* 4. Trends Analytics Chart */}
       <div className="grid lg:grid-cols-2 gap-6">
         <div className="card-premium">
-          <h3 className="font-bold text-slate-800 text-base mb-4">Quad Size Recovery Curve</h3>
-          <TrendLine data={chart} keyName="quad" label="Operated Quad Circumference" strokeColor="#2563EB" />
+          <h3 className="font-bold text-brand-ink text-base mb-4 tracking-tight">Quad Size Recovery Curve</h3>
+          <TrendLine data={chart} keyName="quad" label="Operated Quad Circumference" strokeColor="#e60023" />
         </div>
         <div className="card-premium">
-          <h3 className="font-bold text-slate-800 text-base mb-4">Daily Recovery & Sleep Score</h3>
-          <TrendBar data={chart} keyName="recovery" label="Recovery Index (%)" barColor="#10B981" />
+          <h3 className="font-bold text-brand-ink text-base mb-4 tracking-tight">Daily Recovery & Sleep Score</h3>
+          <TrendBar data={chart} keyName="recovery" label="Recovery Index (%)" barColor="#103c25" />
         </div>
       </div>
     </Layout>
